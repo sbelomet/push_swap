@@ -6,7 +6,7 @@
 /*   By: sbelomet <sbelomet@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 11:08:06 by sbelomet          #+#    #+#             */
-/*   Updated: 2023/11/07 15:15:27 by sbelomet         ###   ########.fr       */
+/*   Updated: 2023/11/08 16:02:33 by sbelomet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,41 @@ void	ft_free_array(char **array)
 	free(array);
 }
 
-int	is_numerical(char *s)
+int	is_numerical(char **tab)
 {
 	int	i;
+	int	j;
 
-	i = 0;
-	while (s[i] == ' ' || s[i] == '+' || s[i] == '-'
-		|| (s[i] >= '0' && s[i] <= '9') || (s[i] > 8 && s[i] < 14))
-	{	
-		if ((s[i] == '-' || s[i] == '+')
-			&& !(s[i + 1] >= '0' && s[i + 1] <= '9'))
+	i = 1;
+	while (tab[i])
+	{
+		j = 0;
+		while (tab[i][j] == ' ' || tab[i][j] == '+' || tab[i][j] == '-'
+			|| (tab[i][j] >= '0' && tab[i][j] <= '9'))
+		{	
+			if ((tab[i][j] == '-' || tab[i][j] == '+')
+				&& !(tab[i][j + 1] >= '0' && tab[i][j + 1] <= '9'))
+				return (0);
+			j++;
+		}
+		if (j != ft_strlen(tab[i]))
 			return (0);
 		i++;
 	}
-	printf("|%s|\n", s);
-	if (i != ft_strlen(s))
-		return (0);
+	return (1);
+}
+
+int	check_doubles(char **tab)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = i + 1;
+	while (tab[j])
+	{
+		// to do
+	}
 	return (1);
 }
 
@@ -62,7 +81,11 @@ char	**ft_join_args(char **av)
 		i++;
 	}
 	res = ft_split(tmp1, ' ');
-	printf("|%s|\n", tmp1);
 	free(tmp1);
+	if (!check_doubles(res))
+	{
+		ft_free_array(res);
+		return (NULL);
+	}
 	return (res);
 }

@@ -6,7 +6,7 @@
 #    By: sbelomet <sbelomet@42lausanne.ch>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/19 13:12:12 by sbelomet          #+#    #+#              #
-#    Updated: 2023/11/07 15:26:37 by sbelomet         ###   ########.fr        #
+#    Updated: 2023/11/08 12:17:41 by sbelomet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ CHILLY		=	\xf0\x9f\xa5\xb6
 
 #Sources
 
-SRC_RAW		=	main stack_utils1 utils1 libft_utils1 libft_utils2 split
+SRC_RAW		=	main stack_utils1 utils1 libft_utils1 libft_utils2 split sort_commands
 
 SRCS		=	$(addsuffix .c, $(SRC_RAW))
 OBJS		=	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_RAW)))

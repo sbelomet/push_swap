@@ -6,7 +6,7 @@
 /*   By: sbelomet <sbelomet@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 15:13:14 by sbelomet          #+#    #+#             */
-/*   Updated: 2023/11/07 15:15:38 by sbelomet         ###   ########.fr       */
+/*   Updated: 2023/11/08 16:01:43 by sbelomet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,40 @@ void	ft_putnbr_fd(int n, int fd)
 	{
 		ft_putchar_fd((n + '0'), fd);
 	}
+}
+
+int	ft_atoi(char *str)
+{
+	int	i;
+	int	neg;
+	int	res;
+
+	i = 0;
+	neg = 1;
+	res = 0;
+	while ((str[i] > 8 && str[i] < 14) || str[i] == ' ')
+		i++;
+	if (str[i] == '-')
+	{
+		neg *= -1;
+		i++;
+	}
+	else if (str[i] == '+')
+		i++;
+	while (str[i] > 47 && str[i] < 58)
+	{
+		res = res * 10 + (str[i] - '0');
+		i++;
+	}
+	return (res * neg);
+}
+
+int	ft_strncmp(char *s1, char *s2)
+{
+	int	i;
+
+	i = 0;
+	while (s1[i] && s1[i] == s2[i])
+		i++;
+	return (s1[i] - s2[i]);
 }
