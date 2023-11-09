@@ -6,7 +6,7 @@
 /*   By: sbelomet <sbelomet@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 11:08:06 by sbelomet          #+#    #+#             */
-/*   Updated: 2023/11/08 16:02:33 by sbelomet         ###   ########.fr       */
+/*   Updated: 2023/11/09 10:13:02 by sbelomet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,16 @@ int	check_doubles(char **tab)
 	int	j;
 
 	i = 0;
-	j = i + 1;
-	while (tab[j])
+	while (tab[i])
 	{
-		// to do
+		j = i + 1;
+		while (tab[j])
+		{
+			if (!(ft_strcmp(tab[i], tab[j])))
+				return (0);
+			j++;
+		}
+		i++;
 	}
 	return (1);
 }

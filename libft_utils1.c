@@ -6,7 +6,7 @@
 /*   By: sbelomet <sbelomet@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 13:12:59 by sbelomet          #+#    #+#             */
-/*   Updated: 2023/11/07 15:24:25 by sbelomet         ###   ########.fr       */
+/*   Updated: 2023/11/09 10:10:26 by sbelomet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,4 +92,14 @@ char	*ft_substr(char *s, int start, int len)
 	}
 	res[i] = '\0';
 	return (res);
+}
+
+int	ft_strcmp(char *s1, char *s2)
+{
+	int	i;
+
+	i = 0;
+	while (s1[i] && s1[i] == s2[i])
+		i++;
+	return (s1[i] - s2[i]);
 }
