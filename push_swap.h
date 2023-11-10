@@ -6,7 +6,7 @@
 /*   By: sbelomet <sbelomet@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 10:05:51 by sbelomet          #+#    #+#             */
-/*   Updated: 2023/11/09 11:23:37 by sbelomet         ###   ########.fr       */
+/*   Updated: 2023/11/10 16:01:03 by sbelomet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ typedef struct s_stack
 	struct s_stack	*after;
 }					t_stack;
 
-void	ft_print_stack(t_stack **stack); /*for testing, remove later*/
-
 t_stack	*ft_stack_new_node(int value);
 void	ft_stack_add_front(t_stack **stack, t_stack *new);
+void	ft_stack_add_back(t_stack **stack, t_stack *new);
 int		ft_stack_len(t_stack *first_node);
 void	ft_make_stack(t_stack **a, char **av);
 void	ft_free_stack(t_stack **stack);
+t_stack	*ft_last_node(t_stack *node);
 
 int		is_numerical(char **tab);
 char	**ft_join_args(char **av);
@@ -53,5 +53,13 @@ void	ss(t_stack **a, t_stack **b);
 
 void	pa(t_stack **a, t_stack **b);
 void	pb(t_stack **a, t_stack **b);
+
+void	ra(t_stack **a);
+void	rb(t_stack **b);
+void	rr(t_stack **a, t_stack **b);
+
+void	rra(t_stack **a);
+void	rrb(t_stack **b);
+void	rrr(t_stack **a, t_stack **b);
 
 #endif

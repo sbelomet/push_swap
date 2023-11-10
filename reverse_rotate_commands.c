@@ -1,53 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap_commands.c                                    :+:      :+:    :+:   */
+/*   reverse_rotate_commands.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sbelomet <sbelomet@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/08 11:37:10 by sbelomet          #+#    #+#             */
-/*   Updated: 2023/11/10 14:12:30 by sbelomet         ###   ########.fr       */
+/*   Created: 2023/11/10 11:56:23 by sbelomet          #+#    #+#             */
+/*   Updated: 2023/11/10 16:00:40 by sbelomet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	ft_swap(t_stack **head)
+static int	ft_revrotate(t_stack **head)
 {
-	t_stack	*tmp;
+	t_stack	*last;
 
 	if (!head || !(ft_stack_len(*head)) || ft_stack_len(*head) == 1)
 		return (0);
-	tmp = (*head)->after;
-	tmp->after->before = *head;
-	(*head)->before->after = tmp;
-	(*head)->after = tmp->after;
-	tmp->after = *head;
-	tmp->before = (*head)->before;
-	(*head)->before = tmp;
-	if (tmp->is_last)
-	{
-		tmp->is_last = 0;
-		(*head)->is_last = 1;
-	}
-	*head = tmp;
+	last = ft_last_node(*head);
+	last->is_last = 0;
+	last->before->is_last = 1;
+	*head = last;
 	return (1);
 }
 
-void	sa(t_stack **a)
+void	rra(t_stack **a)
 {
-	if (ft_swap(a))
-		write(1, "sa\n", 3);
+	if (ft_revrotate(a))
+		write(1, "rra\n", 4);
 }
 
-void	sb(t_stack **b)
+void	rrb(t_stack **b)
 {
-	if (ft_swap(b))
-		write(1, "sb\n", 3);
+	if (ft_revrotate(b))
+		write(1, "rrb\n", 4);
 }
 
-void	ss(t_stack **a, t_stack **b)
+void	rrr(t_stack **a, t_stack **b)
 {
-	if (ft_swap(a) && ft_swap(b))
-		write(1, "ss\n", 3);
+	if (ft_revrotate(a) && ft_revrotate(b))
+		write(1, "rrr\n", 4);
 }

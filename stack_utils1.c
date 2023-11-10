@@ -6,7 +6,7 @@
 /*   By: sbelomet <sbelomet@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 10:49:16 by sbelomet          #+#    #+#             */
-/*   Updated: 2023/11/09 11:55:29 by sbelomet         ###   ########.fr       */
+/*   Updated: 2023/11/10 15:17:22 by sbelomet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,25 +20,10 @@ t_stack	*ft_stack_new_node(int value)
 	if (!res)
 		return (NULL);
 	res->value = value;
-	res->before = NULL;
-	res->after = NULL;
+	res->before = res;
+	res->after = res;
 	res->is_last = 0;
 	return (res);
-}
-
-int	ft_stack_len(t_stack *first_node)
-{
-	int		i;
-	t_stack	*tmp;
-
-	i = 0;
-	tmp = first_node;
-	while (tmp)
-	{
-		tmp = tmp->after;
-		i++;
-	}
-	return (i);
 }
 
 void	ft_free_stack(t_stack **stack)
@@ -53,6 +38,8 @@ void	ft_free_stack(t_stack **stack)
 		{
 			tmp = current->after;
 			free(current);
+			if (current->is_last)
+				break ;
 			current = tmp;
 		}
 		*stack = NULL;
@@ -68,26 +55,53 @@ void	ft_make_stack(t_stack **a, char **av)
 	while (av[i])
 	{
 		new = ft_stack_new_node(ft_atoi(av[i]));
-		printf("new node with: %d, %d\n", new->value, new->is_last);
-		ft_stack_add_front(a, new);
+		ft_stack_add_back(a, new);
 		i++;
+	}
+}
+
+void	ft_stack_add_back(t_stack **stack, t_stack *new)
+{
+	t_stack	*last;
+
+	if (*stack)
+	{
+		last = ft_last_node(*stack);
+		(*stack)->before = new;
+		new->after = *stack;
+		last->after = new;
+		new->before = last;
+		last->is_last = 0;
+		new->is_last = 1;
+	}
+	else
+	{
+		*stack = new;
+		(*stack)->before = *stack;
+		(*stack)->after = *stack;
+		(*stack)->is_last = 1;
 	}
 }
 
 void	ft_stack_add_front(t_stack **stack, t_stack *new)
 {
+	t_stack	*last;
+
 	if (*stack)
 	{
+		last = ft_last_node(*stack);
 		(*stack)->before = new;
 		new->after = *stack;
+		last->after = new;
+		new->before = last;
+		new->is_last = 0;
 		*stack = new;
-		(*stack)->is_last = 0;
-		printf("1made node with: %d, %d\n", (*stack)->value, (*stack)->is_last);
 	}
 	else
 	{
 		*stack = new;
+		(*stack)->before = *stack;
+		(*stack)->after = *stack;
 		(*stack)->is_last = 1;
-		printf("2made node with: %d, %d\n", (*stack)->value, (*stack)->is_last);
 	}
 }
