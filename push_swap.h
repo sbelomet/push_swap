@@ -6,7 +6,7 @@
 /*   By: sbelomet <sbelomet@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 10:05:51 by sbelomet          #+#    #+#             */
-/*   Updated: 2023/11/10 16:01:03 by sbelomet         ###   ########.fr       */
+/*   Updated: 2023/11/13 15:35:01 by sbelomet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,14 @@ int		ft_stack_len(t_stack *first_node);
 void	ft_make_stack(t_stack **a, char **av);
 void	ft_free_stack(t_stack **stack);
 t_stack	*ft_last_node(t_stack *node);
+t_stack	*ft_biggest_node(t_stack **head);
+t_stack	*ft_biggest_smaller(t_stack **head, int target);
 
 int		is_numerical(char **tab);
 char	**ft_join_args(char **av);
 void	ft_free_array(char **array);
 int		check_doubles(char **tab);
+int		is_sorted(t_stack *a);
 
 int		ft_strlen(char *s);
 char	*ft_strdup(char *s1);
@@ -61,5 +64,14 @@ void	rr(t_stack **a, t_stack **b);
 void	rra(t_stack **a);
 void	rrb(t_stack **b);
 void	rrr(t_stack **a, t_stack **b);
+
+int		ft_calculate_cost(t_stack **a, t_stack **b,
+			t_stack *current, t_stack *biggest_smaller);
+t_stack	*ft_find_cheapest_move(t_stack **a, t_stack **b,
+			t_stack *biggest_smaller);
+void	ft_push_cheapest(t_stack **a, t_stack **b,
+			t_stack *atarget, t_stack *btarget);
+void	ft_tiny_sort(t_stack **head);
+void	ft_turkish_sort(t_stack **a, t_stack **b);
 
 #endif

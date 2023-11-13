@@ -6,7 +6,7 @@
 /*   By: sbelomet <sbelomet@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 11:08:06 by sbelomet          #+#    #+#             */
-/*   Updated: 2023/11/09 10:13:02 by sbelomet         ###   ########.fr       */
+/*   Updated: 2023/11/13 13:36:05 by sbelomet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,4 +94,19 @@ char	**ft_join_args(char **av)
 		return (NULL);
 	}
 	return (res);
+}
+
+int	is_sorted(t_stack *a)
+{
+	t_stack	*tmp;
+
+	tmp = a;
+	while (!(tmp->is_last))
+	{
+		if (tmp->value < tmp->after->value)
+			tmp = tmp->after;
+		else
+			return (0);
+	}
+	return (1);
 }

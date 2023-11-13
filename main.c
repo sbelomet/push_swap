@@ -6,7 +6,7 @@
 /*   By: sbelomet <sbelomet@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 10:04:32 by sbelomet          #+#    #+#             */
-/*   Updated: 2023/11/10 16:01:12 by sbelomet         ###   ########.fr       */
+/*   Updated: 2023/11/13 15:24:09 by sbelomet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,17 @@ int	main(int ac, char **av)
 		else if (ft_stack_len(a) == 3)
 			ft_tiny_sort(&a);
 		else
-			ft_turc(&a, &b);
+		{
+			pb(&a, &b);
+			pb(&a, &b);
+			ft_find_cheapest_move(&a, &b);
+			//ft_turkish_sort(&a, &b);
+		}
+		ft_print_stack(&b);
+		ft_free_stack(&b);
 	}
+	ft_print_stack(&a);
 	ft_free_stack(&a);
-	ft_free_stack(&b);
 	ft_free_array(av);
 	printf("OK\n");
 }
