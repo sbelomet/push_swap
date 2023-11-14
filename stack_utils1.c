@@ -6,7 +6,7 @@
 /*   By: sbelomet <sbelomet@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 10:49:16 by sbelomet          #+#    #+#             */
-/*   Updated: 2023/11/10 15:17:22 by sbelomet         ###   ########.fr       */
+/*   Updated: 2023/11/14 10:14:59 by sbelomet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,11 @@ t_stack	*ft_stack_new_node(int value)
 	if (!res)
 		return (NULL);
 	res->value = value;
-	res->before = res;
-	res->after = res;
+	res->before = NULL;
+	res->after = NULL;
 	res->is_last = 0;
+	res->biggest_smaller = 0;
+	res->cheapest = 0;
 	return (res);
 }
 

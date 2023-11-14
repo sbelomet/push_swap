@@ -6,7 +6,7 @@
 /*   By: sbelomet <sbelomet@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 10:46:04 by sbelomet          #+#    #+#             */
-/*   Updated: 2023/11/13 15:04:58 by sbelomet         ###   ########.fr       */
+/*   Updated: 2023/11/14 11:32:14 by sbelomet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,30 +62,55 @@ t_stack	*ft_biggest_node(t_stack **head)
 	return (biggest);
 }
 
-t_stack	*ft_biggest_smaller(t_stack **head, int target)
+void	ft_biggest_smaller(t_stack **head, int target)
 {
 	t_stack	*tmp;
-	t_stack	*biggest_smaller;
+	t_stack	*bs_node;
 
+	ft_reset_node_params(head, 'b');
 	tmp = *head;
-	biggest_smaller = NULL;
-	printf("start tmp: %d, TARGET: %d\n", tmp->value, target);
+	bs_node = NULL;
 	while (tmp)
 	{
 		if (tmp->value < target)
 		{
-			printf("tmp: %d\n", tmp->value);
-			if (!biggest_smaller || tmp->value > biggest_smaller->value)
+			if (!bs_node || tmp->value > bs_node->value)
 			{
-				biggest_smaller = tmp;
-				printf("biggist smaller: %d\n", biggest_smaller->value);
+				bs_node = tmp;
 			}
 		}
 		if (tmp->is_last)
 			break ;
 		tmp = tmp->after;
 	}
-	if (!biggest_smaller)
-		biggest_smaller = ft_biggest_node(head);
-	return (biggest_smaller);
+	if (!bs_node)
+		bs_node = ft_biggest_node(head);
+	bs_node->biggest_smaller = 1;
+}
+
+void	ft_reset_node_params(t_stack **stack, char param)
+{
+	t_stack	*head;
+
+	head = *stack;
+	if (param == 'b')
+	{
+		while (head)
+		{
+			head->biggest_smaller = 0;
+			if (head->is_last)
+				break ;
+			head = head->after;
+		}
+	}
+	else if (param == 'c')
+	{
+		while (head)
+		{
+			head->cheapest = 0;
+			if (head->is_last)
+				break ;
+			head = head->after;
+		}
+	}
 }

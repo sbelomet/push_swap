@@ -6,13 +6,13 @@
 /*   By: sbelomet <sbelomet@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 10:04:32 by sbelomet          #+#    #+#             */
-/*   Updated: 2023/11/13 15:24:09 by sbelomet         ###   ########.fr       */
+/*   Updated: 2023/11/14 14:10:45 by sbelomet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	ft_print_stack(t_stack **stack)
+void	ft_print_stack(t_stack **stack)
 {
 	t_stack	*tmp;
 
@@ -21,6 +21,8 @@ static void	ft_print_stack(t_stack **stack)
 	{
 		ft_putnbr_fd(tmp->value, 1);
 		write(1, ", ", 2);
+		printf("cheapest: %d, bs: %d, is last: %d\n",
+			tmp->cheapest, tmp->biggest_smaller, tmp->is_last);
 		if (tmp->is_last)
 			break ;
 		tmp = tmp->after;
@@ -49,17 +51,8 @@ int	main(int ac, char **av)
 		else if (ft_stack_len(a) == 3)
 			ft_tiny_sort(&a);
 		else
-		{
-			pb(&a, &b);
-			pb(&a, &b);
-			ft_find_cheapest_move(&a, &b);
-			//ft_turkish_sort(&a, &b);
-		}
-		ft_print_stack(&b);
-		ft_free_stack(&b);
+			ft_turkish_sort(&a, &b);
 	}
-	ft_print_stack(&a);
-	ft_free_stack(&a);
 	ft_free_array(av);
 	printf("OK\n");
 }
