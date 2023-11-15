@@ -6,7 +6,7 @@
 /*   By: sbelomet <sbelomet@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:51:40 by sbelomet          #+#    #+#             */
-/*   Updated: 2023/11/14 14:05:50 by sbelomet         ###   ########.fr       */
+/*   Updated: 2023/11/15 15:09:44 by sbelomet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,18 +47,19 @@ void	ft_turkish_sort(t_stack **a, t_stack **b)
 	while (ft_stack_len(*a) > 3)
 	{	
 		ft_find_cheapest_move(a, b);
+		// todo: find where to move first you clod
 		ft_push_cheapest(a, b, 'a');
 	}
 	ft_tiny_sort(a);
-	while (ft_stack_len(*b))
-	{
+	//while (ft_stack_len(*b))
+	//{ 
 		ft_print_stack(a);
 		ft_print_stack(b);
-		ft_find_cheapest_move(b, a);
+		/* ft_find_cheapest_move(b, a);
 		ft_print_stack(b);
 		ft_push_cheapest(b, a, 'b');
 	}
 	ft_print_stack(a);
 	ft_free_stack(a);
-	ft_free_stack(b);
+	ft_free_stack(b); */
 }

@@ -6,7 +6,7 @@
 /*   By: sbelomet <sbelomet@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 10:05:51 by sbelomet          #+#    #+#             */
-/*   Updated: 2023/11/14 12:12:28 by sbelomet         ###   ########.fr       */
+/*   Updated: 2023/11/15 14:36:29 by sbelomet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,28 @@ void	rra(t_stack **a);
 void	rrb(t_stack **b);
 void	rrr(t_stack **a, t_stack **b);
 
-/*Sort Utils*/
+/*Cost Calc Commands*/
 int		ft_calculate_cost(t_stack **a, t_stack **b, t_stack *current);
+int		ft_calcrrarrb(t_stack **a, t_stack **b,
+			t_stack *atarget, t_stack *btarget);
+int		ft_calcrrarb(t_stack **a, t_stack **b,
+			t_stack *atarget, t_stack *btarget);
+int		ft_calcarrb(t_stack **a, t_stack **b,
+			t_stack *atarget, t_stack *btarget);
+int		ft_calcrarb(t_stack **a, t_stack **b,
+			t_stack *atarget, t_stack *btarget);
+
+/*Push Cheap Commands*/
+void	ft_rrarrb(t_stack **first, t_stack **second, char mode);
+void	ft_rrarb(t_stack **first, t_stack **second, char mode);
+void	ft_rarrb(t_stack **first, t_stack **second, char mode);
+void	ft_rarb(t_stack **first, t_stack **second, char mode);
+
+/*Sort Utils*/
 void	ft_find_cheapest_move(t_stack **a, t_stack **b);
+int		ft_find_node_index(t_stack **head, char mode);
 void	ft_push_cheapest(t_stack **a, t_stack **b, char mode);
+t_stack	*ft_find_node_address(t_stack **head, char mode);
 
 /*Sort Commands*/
 void	ft_tiny_sort(t_stack **head);

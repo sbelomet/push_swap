@@ -6,7 +6,7 @@
 /*   By: sbelomet <sbelomet@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 10:46:04 by sbelomet          #+#    #+#             */
-/*   Updated: 2023/11/14 11:32:14 by sbelomet         ###   ########.fr       */
+/*   Updated: 2023/11/15 15:56:46 by sbelomet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ t_stack	*ft_biggest_node(t_stack **head)
 	return (biggest);
 }
 
-void	ft_biggest_smaller(t_stack **head, int target)
+void	ft_biggest_smaller(t_stack **head, t_stack *current) // MODIF LE TRUC POUR AVOIR DES TRUC TU SAIS
 {
 	t_stack	*tmp;
 	t_stack	*bs_node;
@@ -72,7 +72,7 @@ void	ft_biggest_smaller(t_stack **head, int target)
 	bs_node = NULL;
 	while (tmp)
 	{
-		if (tmp->value < target)
+		if (tmp->value < current->value)
 		{
 			if (!bs_node || tmp->value > bs_node->value)
 			{

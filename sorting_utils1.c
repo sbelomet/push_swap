@@ -6,40 +6,53 @@
 /*   By: sbelomet <sbelomet@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 12:07:52 by sbelomet          #+#    #+#             */
-/*   Updated: 2023/11/14 14:07:47 by sbelomet         ###   ########.fr       */
+/*   Updated: 2023/11/15 14:37:57 by sbelomet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-// todo: remake cost calc to include revrot, good luck hihi
-
-int	ft_calculate_cost(t_stack **a, t_stack **b, t_stack *current)
+t_stack	*ft_find_node_address(t_stack **head, char mode)
 {
-	t_stack	*atmp;
-	t_stack	*btmp;
-	int		cost;
+	t_stack	*res;
 
-	atmp = *a;
-	btmp = *b;
-	cost = 0;
-	while (atmp != current && !(btmp->biggest_smaller))
+	res = *head;
+	if (mode == 'b')
 	{
-		cost++;
-		atmp = atmp->after;
-		btmp = btmp->after;
+		while (res)
+		{
+			if (res->biggest_smaller)
+				return(res);
+			res = res->after;
+		}
 	}
-	while (atmp != current)
+	return (NULL);
+}
+
+int	ft_find_node_index(t_stack **head, char mode)
+{
+	t_stack	*tmp;
+	int		i;
+
+	tmp = *head;
+	i = 0;
+	if (mode == 'b')
 	{
-		cost++;
-		atmp = atmp->after;
+		while (!(tmp->biggest_smaller))
+		{
+			i++;
+			tmp = tmp->after;
+		}
 	}
-	while (!(btmp->biggest_smaller))
+	else if (mode == 'c')
 	{
-		cost++;
-		btmp = btmp->after;
+		while (!(tmp->cheapest))
+		{
+			i++;
+			tmp = tmp->after;
+		}
 	}
-	return (cost + 1);
+	return (i);
 }
 
 void	ft_find_cheapest_move(t_stack **a, t_stack **b)
@@ -56,6 +69,7 @@ void	ft_find_cheapest_move(t_stack **a, t_stack **b)
 	{
 		ft_biggest_smaller(b, current->value);
 		cost = ft_calculate_cost(a, b, current);
+		printf("current: %d, cost: %d\n", current->value, cost);
 		if (!(smallest_cost) || cost < smallest_cost)
 		{
 			smallest_cost = cost;
@@ -65,29 +79,32 @@ void	ft_find_cheapest_move(t_stack **a, t_stack **b)
 			break ;
 		current = current->after;
 	}
+	ft_print_stack(b);
 	cheapest->cheapest = 1;
 }
 
-void	ft_push_cheapest(t_stack **first, t_stack **second, char mode)
+void	ft_push_cheapest(t_stack **a, t_stack **b, char mode)
 {
-	if (mode == 'a')
+	int		atarget;
+	int		btarget;
+	int		alen;
+	int		blen;
+
+	alen = ft_stack_len(*a);
+	blen = ft_stack_len(*b);
+	atarget = ft_find_node_index(a, 'c');
+	btarget = ft_find_node_index(b, 'b');
+	if (mode == 'b')
 	{
-		while (!((*first)->cheapest) && !((*second)->biggest_smaller))
-			rr(first, second);
-		while (!((*first)->cheapest))
-			ra(first);
-		while (!((*second)->biggest_smaller))
-			rb(second);
-		pb(first, second);
+		atarget = ft_find_node_index(a, 'b');
+		btarget = ft_find_node_index(b, 'c');
 	}
-	else if (mode == 'b')
-	{
-		while (!((*first)->cheapest) && !((*second)->biggest_smaller))
-			rr(first, second);
-		while (!((*first)->cheapest))
-			rb(first);
-		while (!((*second)->biggest_smaller))
-			ra(second);
-		pa(second, first);
-	}
+	if (atarget > alen / 2 && btarget > blen / 2)
+		ft_rrarrb(a, b, mode);
+	else if (atarget > alen / 2)
+		ft_rrarb(a, b, mode);
+	else if (btarget > blen / 2)
+		ft_rarrb(a, b, mode);
+	else
+		ft_rarb(a, b, mode);
 }
