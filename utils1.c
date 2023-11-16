@@ -6,7 +6,7 @@
 /*   By: sbelomet <sbelomet@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 11:08:06 by sbelomet          #+#    #+#             */
-/*   Updated: 2023/11/13 13:36:05 by sbelomet         ###   ########.fr       */
+/*   Updated: 2023/11/16 12:32:47 by sbelomet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,15 @@ void	ft_free_array(char **array)
 	int	i;
 
 	i = 0;
-	while (array[i])
+	if (array)
 	{
-		free(array[i]);
-		i++;
+		while (array[i])
+		{
+			free(array[i]);
+			i++;
+		}
+		free(array);
 	}
-	free(array);
 }
 
 int	is_numerical(char **tab)

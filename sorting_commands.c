@@ -6,7 +6,7 @@
 /*   By: sbelomet <sbelomet@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:51:40 by sbelomet          #+#    #+#             */
-/*   Updated: 2023/11/15 15:09:44 by sbelomet         ###   ########.fr       */
+/*   Updated: 2023/11/16 12:43:54 by sbelomet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,24 +42,27 @@ void	ft_tiny_sort(t_stack **head)
 
 void	ft_turkish_sort(t_stack **a, t_stack **b)
 {
+	t_stack	*cheapest;
+
+	cheapest = NULL;
 	while (ft_stack_len(*a) > 3 && ft_stack_len(*b) != 2)
 		pb(a, b);
 	while (ft_stack_len(*a) > 3)
 	{	
-		ft_find_cheapest_move(a, b);
-		// todo: find where to move first you clod
-		ft_push_cheapest(a, b, 'a');
+		cheapest = ft_find_cheapest_move(a, b);
+		ft_push_cheapest(a, b, cheapest, 'a');
 	}
 	ft_tiny_sort(a);
-	//while (ft_stack_len(*b))
-	//{ 
-		ft_print_stack(a);
-		ft_print_stack(b);
-		/* ft_find_cheapest_move(b, a);
-		ft_print_stack(b);
-		ft_push_cheapest(b, a, 'b');
+	while (ft_stack_len(*b))
+	{
+		cheapest = ft_find_cheapest_move(b, a);
+		ft_push_cheapest(b, a, cheapest, 'b');
 	}
-	ft_print_stack(a);
-	ft_free_stack(a);
-	ft_free_stack(b); */
+	while (!(ft_biggest_node(a)->is_last))
+	{
+		if (ft_find_node_index(a, ft_biggest_node(a)) > ft_stack_len(*a) / 2)
+			rra(a);
+		else
+			ra(a);
+	}
 }

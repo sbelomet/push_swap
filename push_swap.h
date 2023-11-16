@@ -6,7 +6,7 @@
 /*   By: sbelomet <sbelomet@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 10:05:51 by sbelomet          #+#    #+#             */
-/*   Updated: 2023/11/15 14:36:29 by sbelomet         ###   ########.fr       */
+/*   Updated: 2023/11/16 12:28:02 by sbelomet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,11 @@ typedef struct s_stack
 {
 	int				value;
 	int				is_last;
-	int				biggest_smaller;
 	int				cheapest;
+	struct s_stack	*biggest_smaller;
 	struct s_stack	*before;
 	struct s_stack	*after;
 }					t_stack;
-
-void	ft_print_stack(t_stack **stack);
 
 /*Utils*/
 int		is_numerical(char **tab);
@@ -44,8 +42,9 @@ void	ft_make_stack(t_stack **a, char **av);
 void	ft_free_stack(t_stack **stack);
 t_stack	*ft_last_node(t_stack *node);
 t_stack	*ft_biggest_node(t_stack **head);
-void	ft_biggest_smaller(t_stack **head, int target);
-void	ft_reset_node_params(t_stack **stack, char param);
+t_stack	*ft_smallest_node(t_stack **head);
+void	ft_biggest_smaller(t_stack **head, t_stack *current);
+void	ft_reset_cheapest(t_stack **stack);
 
 /*Libft Utils*/
 int		ft_strlen(char *s);
@@ -89,15 +88,20 @@ int		ft_calcrarb(t_stack **a, t_stack **b,
 			t_stack *atarget, t_stack *btarget);
 
 /*Push Cheap Commands*/
-void	ft_rrarrb(t_stack **first, t_stack **second, char mode);
-void	ft_rrarb(t_stack **first, t_stack **second, char mode);
-void	ft_rarrb(t_stack **first, t_stack **second, char mode);
-void	ft_rarb(t_stack **first, t_stack **second, char mode);
+void	ft_rrarrb(t_stack **first, t_stack **second,
+			t_stack *cheapest, char mode);
+void	ft_rrarb(t_stack **first, t_stack **second,
+			t_stack *cheapest, char mode);
+void	ft_rarrb(t_stack **first, t_stack **second,
+			t_stack *cheapest, char mode);
+void	ft_rarb(t_stack **first, t_stack **second,
+			t_stack *cheapest, char mode);
 
 /*Sort Utils*/
-void	ft_find_cheapest_move(t_stack **a, t_stack **b);
-int		ft_find_node_index(t_stack **head, char mode);
-void	ft_push_cheapest(t_stack **a, t_stack **b, char mode);
+t_stack	*ft_find_cheapest_move(t_stack **a, t_stack **b);
+int		ft_find_node_index(t_stack **head, t_stack *to_find);
+void	ft_push_cheapest(t_stack **a, t_stack **b,
+			t_stack *cheapest, char mode);
 t_stack	*ft_find_node_address(t_stack **head, char mode);
 
 /*Sort Commands*/

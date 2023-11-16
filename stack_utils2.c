@@ -6,7 +6,7 @@
 /*   By: sbelomet <sbelomet@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 10:46:04 by sbelomet          #+#    #+#             */
-/*   Updated: 2023/11/15 15:56:46 by sbelomet         ###   ########.fr       */
+/*   Updated: 2023/11/16 12:23:52 by sbelomet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,55 +62,38 @@ t_stack	*ft_biggest_node(t_stack **head)
 	return (biggest);
 }
 
-void	ft_biggest_smaller(t_stack **head, t_stack *current) // MODIF LE TRUC POUR AVOIR DES TRUC TU SAIS
+void	ft_biggest_smaller(t_stack **head, t_stack *current)
 {
 	t_stack	*tmp;
-	t_stack	*bs_node;
 
-	ft_reset_node_params(head, 'b');
 	tmp = *head;
-	bs_node = NULL;
+	current->biggest_smaller = NULL;
 	while (tmp)
 	{
 		if (tmp->value < current->value)
 		{
-			if (!bs_node || tmp->value > bs_node->value)
-			{
-				bs_node = tmp;
-			}
+			if (!(current->biggest_smaller)
+				|| tmp->value > current->biggest_smaller->value)
+				current->biggest_smaller = tmp;
 		}
 		if (tmp->is_last)
 			break ;
 		tmp = tmp->after;
 	}
-	if (!bs_node)
-		bs_node = ft_biggest_node(head);
-	bs_node->biggest_smaller = 1;
+	if (!current->biggest_smaller)
+		current->biggest_smaller = ft_biggest_node(head);
 }
 
-void	ft_reset_node_params(t_stack **stack, char param)
+void	ft_reset_cheapest(t_stack **stack)
 {
 	t_stack	*head;
 
 	head = *stack;
-	if (param == 'b')
+	while (head)
 	{
-		while (head)
-		{
-			head->biggest_smaller = 0;
-			if (head->is_last)
-				break ;
-			head = head->after;
-		}
-	}
-	else if (param == 'c')
-	{
-		while (head)
-		{
-			head->cheapest = 0;
-			if (head->is_last)
-				break ;
-			head = head->after;
-		}
+		head->cheapest = 0;
+		if (head->is_last)
+			break ;
+		head = head->after;
 	}
 }
