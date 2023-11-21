@@ -6,7 +6,7 @@
 /*   By: sbelomet <sbelomet@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 10:49:16 by sbelomet          #+#    #+#             */
-/*   Updated: 2023/11/16 10:18:09 by sbelomet         ###   ########.fr       */
+/*   Updated: 2023/11/21 10:13:21 by sbelomet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	ft_make_stack(t_stack **a, char **av)
 	i = 0;
 	while (av[i])
 	{
-		new = ft_stack_new_node(ft_atoi(av[i]));
+		new = ft_stack_new_node((int)ft_atoi(av[i]));
 		ft_stack_add_back(a, new);
 		i++;
 	}

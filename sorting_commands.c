@@ -6,7 +6,7 @@
 /*   By: sbelomet <sbelomet@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 09:51:40 by sbelomet          #+#    #+#             */
-/*   Updated: 2023/11/16 12:43:54 by sbelomet         ###   ########.fr       */
+/*   Updated: 2023/11/21 11:54:53 by sbelomet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ void	ft_turkish_sort(t_stack **a, t_stack **b)
 	t_stack	*cheapest;
 
 	cheapest = NULL;
-	while (ft_stack_len(*a) > 3 && ft_stack_len(*b) != 2)
+	while (ft_stack_len(*a) > 3 && ft_stack_len(*b) != 2 && !is_sorted(*a))
 		pb(a, b);
-	while (ft_stack_len(*a) > 3)
+	while (ft_stack_len(*a) > 3 && !is_sorted(*a))
 	{	
 		cheapest = ft_find_cheapest_move(a, b);
 		ft_push_cheapest(a, b, cheapest, 'a');

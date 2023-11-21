@@ -6,7 +6,7 @@
 /*   By: sbelomet <sbelomet@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 12:07:52 by sbelomet          #+#    #+#             */
-/*   Updated: 2023/11/16 12:07:17 by sbelomet         ###   ########.fr       */
+/*   Updated: 2023/11/21 11:36:27 by sbelomet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,11 @@ void	ft_push_cheapest(t_stack **a, t_stack **b, t_stack *cheapest, char mode)
 		atarget = ft_find_node_index(b, cheapest->biggest_smaller);
 		btarget = ft_find_node_index(a, cheapest);
 	}
-	if (atarget > alen / 2 && btarget > blen / 2)
+	if (atarget > alen - atarget && btarget > blen - btarget)
 		ft_rrarrb(a, b, cheapest, mode);
-	else if (atarget > alen / 2)
+	else if (atarget > alen - atarget)
 		ft_rrarb(a, b, cheapest, mode);
-	else if (btarget > blen / 2)
+	else if (btarget > blen - btarget)
 		ft_rarrb(a, b, cheapest, mode);
 	else
 		ft_rarb(a, b, cheapest, mode);

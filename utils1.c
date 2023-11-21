@@ -6,7 +6,7 @@
 /*   By: sbelomet <sbelomet@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 11:08:06 by sbelomet          #+#    #+#             */
-/*   Updated: 2023/11/16 12:32:47 by sbelomet         ###   ########.fr       */
+/*   Updated: 2023/11/21 10:20:31 by sbelomet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ char	**ft_join_args(char **av)
 	}
 	res = ft_split(tmp1, ' ');
 	free(tmp1);
-	if (!check_doubles(res))
+	if (!check_doubles(res) || !check_max(res))
 	{
 		ft_free_array(res);
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: sbelomet <sbelomet@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 10:18:32 by sbelomet          #+#    #+#             */
-/*   Updated: 2023/11/16 10:21:28 by sbelomet         ###   ########.fr       */
+/*   Updated: 2023/11/21 12:24:08 by sbelomet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,11 +146,11 @@ int	ft_calculate_cost(t_stack **a, t_stack **b, t_stack *current)
 		atarget++;
 		atmp = atmp->after;
 	}
-	if (atarget > alen / 2 && btarget > blen / 2)
-		return (ft_calcrrarrb(a, b, current, current->biggest_smaller) + 1);
-	else if (atarget > alen / 2)
-		return (ft_calcrrarb(a, b, current, current->biggest_smaller) + 1);
-	else if (btarget > blen / 2)
+	if (atarget < alen - atarget && btarget < blen - btarget)
+		return (ft_calcrarb(a, b, current, current->biggest_smaller) + 1);
+	else if (atarget < alen - atarget)
 		return (ft_calcrarrb(a, b, current, current->biggest_smaller) + 1);
-	return (ft_calcrarb(a, b, current, current->biggest_smaller) + 1);
+	else if (btarget < blen - btarget)
+		return (ft_calcrrarb(a, b, current, current->biggest_smaller) + 1);
+	return (ft_calcrrarrb(a, b, current, current->biggest_smaller) + 1);
 }
